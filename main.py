@@ -21,13 +21,13 @@ if __name__ == "__main__":
     records = []
     for record in data:
         model = {
-        'publisher': Publisher,
-        'shop': Shop,
-        'book': Book,
-        'stock': Stock,
-        'sale': Sale,
-        }[record.get('model')]
-        records.append(model(id=record.get('pk'), **record.get('fields')))
+            "publisher": Publisher,
+            "shop": Shop,
+            "book": Book,
+            "stock": Stock,
+            "sale": Sale,
+        }[record.get("model")]
+        records.append(model(id=record.get("pk"), **record.get("fields")))
 
     with Session(engine) as session:
         session.add_all(records)
@@ -44,9 +44,10 @@ if __name__ == "__main__":
         )
         for book in session.execute(stmt):
             table.append(book)
-        print(tabulate(
-            table,
-            headers=["Book.title", "Shop.name", "Sale.price", "Sale.date_sale"],
-            tablefmt="fancy_outline"
-           )
+        print(
+            tabulate(
+                table,
+                headers=["Book.title", "Shop.name", "Sale.price", "Sale.date_sale"],
+                tablefmt="fancy_outline",
+            )
         )
